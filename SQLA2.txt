@@ -1,0 +1,25 @@
+Q2.
+select name
+from instructor natural left outer join teaches
+where teaches.id is NULL;
+
+----------------
+Q3.
+select *
+from section join classroom using(building,room_number)
+
+----------------
+Q4.
+create view tot_credits as
+select year, count(credits) as num_credits
+from course natural join section
+group by year
+
+----------------
+Q6.
+select avg(salary) as avg_sal
+from works natural left outer join employee
+
+select emp_name
+from works natural left outer join employee
+where works.salary > avg_sal

@@ -1,0 +1,55 @@
+Q3.a
+insert into course values (‘COMP5118’, ‘Aces of Databases’, ‘Comp. Sci.’, ‘0’);
+----------
+
+Q3.b
+insert into section values(‘COMP5118’, ‘A’, ‘Winter’, ‘2020’)
+----------
+
+Q3.c
+insert into takes(id, course_id, sec_id, semester, year)
+select student.id, 'COMP5118', 'A', 'Winter', '2020'
+from student 
+where student.dept_name = 'Comp. Sci.’
+----------
+
+Q3.d
+delete from takes where id = ‘12345’ and course_id = ‘COMP5118’
+----------
+
+Q3.e
+select course_id, id
+from takes
+group by id, course_id
+having count(*)>1
+----------
+
+Q3.f
+select distinct instructor.id, instructor.name 
+from instructor, teaches, takes 
+where takes.grade <> ‘A’ and takes.sec_id = teaches.sec_id and
+teaches.id = instructor.id
+----------
+
+Q3.g
+select distinct instructor.id, instructor.name 
+from instructor, teaches, takes 
+where takes.grade <> ‘A’ and takes.sec_id = teaches.sec_id and
+teaches.id = instructor.id and teaches.course_id IS NOT NULL or teaches.sec_id IS NOT NULL
+----------
+
+Q3.h
+select min(salary) as min_salary
+from instructor
+----------
+
+Q4.a
+select count(report_number) as accident_num 
+from participated, person
+where person.name = ‘Ahmed El-Roby’ and person.driver_id = participated.driver_id and participated.report_number = accident.report_number
+----------
+
+Q4.b
+update participated
+set damage_amount = ‘3000’
+where report_number = ‘AR2020’ and licence_plate = ‘DB007’
